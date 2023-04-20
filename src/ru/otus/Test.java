@@ -47,13 +47,13 @@ class Test {
             try{
                 r = scanner.nextInt();
                 if(r < 1 || r > size){
-                    System.err.println("!!! Введите число от 1 до "+ size);
+                    System.out.println("!!! Введите число от 1 до "+ size);
                 }else {
                     exit = true;
                 }
             }
             catch (Exception e){
-                System.err.println("!!! Введите число от 1 до "+ size);
+                System.out.println("!!! Введите число от 1 до "+ size);
             }
         }while(!exit);
 
