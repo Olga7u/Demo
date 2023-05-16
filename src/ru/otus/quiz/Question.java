@@ -1,4 +1,4 @@
-package ru.otus;
+package ru.otus.quiz;
 
 class Question {
     private final String question;
