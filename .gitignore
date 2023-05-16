@@ -5,7 +5,7 @@ HELP.md
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
-!**/src/test/**/build/
+!**/src/cosmicTest/**/build/
 
 ### STS ###
 .apt_generated
@@ -17,7 +17,7 @@ build/
 .sts4-cache
 bin/
 !**/src/main/**/bin/
-!**/src/test/**/bin/
+!**/src/cosmicTest/**/bin/
 
 ### IntelliJ IDEA ###
 .idea
@@ -26,7 +26,7 @@ bin/
 *.ipr
 out/
 !**/src/main/**/out/
-!**/src/test/**/out/
+!**/src/cosmicTest/**/out/
 
 ### NetBeans ###
 /nbproject/private/
