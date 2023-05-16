@@ -20,7 +20,7 @@ public class Sort {
 
         long time1 = System.currentTimeMillis();
         // Сортировка "пузырьком"
-        sortBobble(numbers1);
+        sortBubble(numbers1);
 
         System.out.println("Время: "+(System.currentTimeMillis()-time1));
         System.out.println("После: "+numbers1);
@@ -37,8 +37,8 @@ public class Sort {
         System.out.println("После: "+numbers2);
     }
 
-    //bobble-sort
-    private static void sortBobble(List<Integer> items){
+    //bubble-sort
+    private static void sortBubble(List<Integer> items){
         if (items.size() <= 1){
             return;
         }
