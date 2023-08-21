@@ -1,5 +1,5 @@
 **Запускаем run hello-world**
-![hello-world](img\hello-world.png)
+![hello-world](img/hello-world.png)
 
 **Размер образа hello-world**
 ![hello-world-size](img\hello-world-size.png)
