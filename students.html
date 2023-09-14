@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>students</title>
+    <style>
+        h3 {
+            color: steelblue;
+        }
+
+        .students-tab {
+            border: 1px solid steelblue;
+            width: 650px;
+            border-collapse: collapse;
+            margin-bottom: 60px;
+        }
+
+        .students-tab tr td {
+            border: 1px solid steelblue;
+        }
+
+        .students-tab-col1 {
+            width: 300px;
+        }
+
+        .students-tab-col2 {
+            width: 120px;
+        }
+
+        .students-tab-col3 {
+            width: 150px;
+        }
+
+        .students-tab-col4 {
+            width: 80px;
+        }
+
+    </style>
+</head>
+<body>
+<h3>Таблица студентов</h3>
+<table class="students-tab" id="studentsTab">
+    <thead>
+    <tr>
+        <td class="students-tab-col1">Имя студента</td>
+        <td class="students-tab-col2">Пол</td>
+        <td class="students-tab-col3">Дата рождения</td>
+        <td class="students-tab-col4">Возраст</td>
+    </tr>
+    </thead>
+  <tfoot>
+    <tr>
+        <td colspan="4">&nbsp;</td>
+    </tr> <tr>
+        <td colspan="3">Средний возраст студентов</td>
+        <td id="ageAverage"></td>
+    </tr>
+    </tfoot>
+</table>
+
+<form action = "input-form" method = "POST">
+    <p>
+        <label for = "fioTextBox">ФИО</label>
+        <input id = "fioTextBox" name = "fio" type = "text">
+    </p>
+
+    <p>
+        <label>
+            Пол
+            <select id = "genderSelect" name = "gender">
+                <option value = "M" selected>Мужчина</option>
+                <option value = "F">Женщина</option>
+            </select>
+        </label>
+    </p>
+
+    <p>
+        <label for = "birthDate">Дата рождения</label>
+        <input id = "birthDate" name = "BirthDate" type = "date">
+    </p>
+    <input type = "button" value = "Добавить" onclick="addRow()">
+</form>
+
+<script type="text/javascript">
+    function getStudent(name, gender, birthDate) {
+            const student = {name: name, gender: gender}
+
+            student.genderName = function () {
+                if (gender == "M"){
+                    gName = "Мужчина";
+                } else if (gender == "F")
+                {
+                    gName = "Женщина";
+                } else {
+                    gName = "";
+                }
+                return gName;
+            }
+
+            student.birthDate = new Date(birthDate);
+            student.birthDateF = function () {
+                var dd = this.birthDate.getDate();
+                if (dd < 10) dd = '0' + dd;
+
+                var mm = this.birthDate.getMonth() + 1;
+                if (mm < 10) mm = '0' + mm;
+
+                var yy = this.birthDate.getFullYear();
+                if (yy < 10) yy = '0' + yy;
+
+                return dd + '.' + mm + '.' + yy;
+            }
+
+            student.getAge = function () {
+                return Math.floor((new Date() - new Date(this.birthDate)) / 1000 / 60 / 60 / 24 / 365)
+            }
+            return student;
+        }
+
+    function getAgeAverage() {
+        var tableRef = document.getElementById("studentsTab");
+        var rows = tableRef.querySelectorAll("tr");
+
+        var a = 0;
+        var n = rows.length-2;
+        for (var i=1; i<n; i++){
+            var currentRow = rows[i];
+            a = a + Number(currentRow.cells[3].innerHTML);
+        }
+        return Math.round(a / (n-1));
+    }
+
+    function addRow() {
+        var tableRef = document.getElementById("studentsTab");
+        var newRow = tableRef.insertRow(tableRef.rows.length-2);
+
+        var student = getStudent(
+            document.getElementById("fioTextBox").value,
+            document.getElementById("genderSelect").value,
+            document.getElementById("birthDate").value
+        );
+
+        var newCell = newRow.insertCell(0);
+        newCell.appendChild((document.createTextNode(student.name)));
+
+        newCell = newRow.insertCell(1);
+        newCell.appendChild((document.createTextNode(student.genderName())));
+
+        newCell = newRow.insertCell(2);
+        newCell.appendChild((document.createTextNode(student.birthDateF())));
+
+        newCell = newRow.insertCell(3);
+        newCell.appendChild((document.createTextNode(student.getAge())));
+
+        var aCell = document.getElementById("ageAverage");
+        aCell.innerHTML = getAgeAverage();
+    }
+
+</script>
+
+</body>
+</html>
